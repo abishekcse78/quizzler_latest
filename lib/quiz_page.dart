@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizzler/quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({Key? key}) : super(key: key);
@@ -15,21 +16,41 @@ class _QuizPageState extends State<QuizPage> {
     /// correctAnswer = True (or) False
     bool correctAnswer = quizBrain.getQuestionAnswer();
     setState(() {
-      /// if the UserPickedAnswer is CorrectAnswer Return True (Tick Icon)
-      correctAnswer == userPickedAnswer
-          ? scoreKeeper.add(const Icon(
-              Icons.check,
-              color: Colors.green,
-            ))
+      if (quizBrain.isFinished() == true) {
+        Alert(
+          context: context,
+          type: AlertType.error,
+          title: "You are Finished",
+          desc:
+              "You are Finished your All Quiz, Thank you for your Participation",
+          buttons: [
+            DialogButton(
+              child: const Text(
+                "Close",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () => Navigator.pop(context),
+              width: 120,
+            )
+          ],
+        ).show();
 
-          /// Else Return False (X icon)
+        /// if the UserPickedAnswer is CorrectAnswer Return True (Tick Icon)
+        correctAnswer == userPickedAnswer
+            ? scoreKeeper.add(const Icon(
+                Icons.check,
+                color: Colors.green,
+              ))
 
-          : scoreKeeper.add(const Icon(
-              Icons.close,
-              color: Colors.red,
-            ));
+            /// Else Return False (X icon)
 
-      quizBrain.getNextQuestion();
+            : scoreKeeper.add(const Icon(
+                Icons.close,
+                color: Colors.red,
+              ));
+
+        quizBrain.getNextQuestion();
+      }
     });
   }
 

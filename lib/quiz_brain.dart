@@ -20,6 +20,7 @@ class QuizBrain {
   ];
 
   void getNextQuestion() {
+    ///Last      13                    14                   So, QuestionNumber(13) < QuestionBank Length(14) is true so questionNumber increase 1 index that is 14, But 14 index is 15 Length, But Question Length is till 14, So we can put Length -1, then it will be 14
     if (_questionNumber < _questionBank.length - 1) {
       _questionNumber++;
     }
@@ -35,6 +36,14 @@ class QuizBrain {
 
   bool getQuestionAnswer() {
     return _questionBank[_questionNumber].answer;
+  }
+
+  bool isFinished() {
+    if (_questionNumber < _questionBank.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
