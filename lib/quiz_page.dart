@@ -13,7 +13,28 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-  int questionNumber = 0;
+  void checkAnswer(userPickedAnswer) {
+    setState(() {
+      /// correctAnswer = True (or) False
+      bool correctAnswer = QuizBrain().getQuestionAnswer();
+
+      /// if the UserPickedAnswer is CorrectAnswer Return True (Tick Icon)
+      correctAnswer == userPickedAnswer
+          ? scoreKeeper.add(const Icon(
+              Icons.check,
+              color: Colors.green,
+            ))
+
+          /// Else Return False (X icon)
+
+          : scoreKeeper.add(const Icon(
+              Icons.close,
+              color: Colors.red,
+            ));
+
+      QuizBrain().getNextQuestion();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +48,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                QuizBrain().questionBank[questionNumber].question,
+                QuizBrain().getQuestionText(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25.0,
@@ -48,23 +69,7 @@ class _QuizPageState extends State<QuizPage> {
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.green)),
                 onPressed: () {
-                  bool correctAnswer =
-                      QuizBrain().questionBank[questionNumber].answer;
-                  setState(() {
-                    correctAnswer == true
-                        ? scoreKeeper.add(const Icon(
-                            Icons.check,
-                            color: Colors.green,
-                          ))
-                        : scoreKeeper.add(const Icon(
-                            Icons.close,
-                            color: Colors.red,
-                          ));
-
-                    questionNumber++;
-                  });
-
-                  print(questionNumber);
+                  checkAnswer(true);
                 },
               )),
         ),
@@ -79,29 +84,7 @@ class _QuizPageState extends State<QuizPage> {
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.red)),
               onPressed: () {
-                bool correctAnswer =
-                    QuizBrain().questionBank[questionNumber].answer;
-
-                /// Already declared the Answers in the Button
-                setState(() {
-                  correctAnswer == false
-                      ? scoreKeeper.add(const Icon(
-                          Icons.check,
-                          color: Colors.green,
-                        ))
-
-                      /// if the Answer is False Return True
-
-                      : scoreKeeper.add(const Icon(
-                          Icons.close,
-                          color: Colors.red,
-                        ));
-                  questionNumber++;
-                });
-
-                /// Else Return False
-
-                print(questionNumber);
+                checkAnswer(false);
               },
             ),
           ),
