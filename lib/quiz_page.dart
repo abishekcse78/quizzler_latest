@@ -14,10 +14,9 @@ class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
   void checkAnswer(userPickedAnswer) {
+    /// correctAnswer = True (or) False
+    bool correctAnswer = QuizBrain().getQuestionAnswer();
     setState(() {
-      /// correctAnswer = True (or) False
-      bool correctAnswer = QuizBrain().getQuestionAnswer();
-
       /// if the UserPickedAnswer is CorrectAnswer Return True (Tick Icon)
       correctAnswer == userPickedAnswer
           ? scoreKeeper.add(const Icon(

@@ -1,7 +1,7 @@
 import 'package:quizzler/questions.dart';
 
 class QuizBrain {
-  int questionNumber = 0;
+  int _questionNumber = 0;
   final List<Questions> _questionBank = [
     Questions('question 1', true),
     Questions('question 2', false),
@@ -20,20 +20,20 @@ class QuizBrain {
   ];
 
   void getNextQuestion() {
-    if (questionNumber < _questionBank.length - 1) {
-      questionNumber++;
+    if (_questionNumber < _questionBank.length - 1) {
+      _questionNumber++;
     }
 
     /// if the Question Number is Less than Length of the Question bank(14), then only The Question Number will be Increased(questionNumber++)
   }
 
   String getQuestionText() {
-    return _questionBank[questionNumber].question;
+    return _questionBank[_questionNumber].question;
 
     /// Now Question Bank is a Private Property, So we can't directly Access the _questionBank List out side of that Class, So We create a Function to get the Question Text, then you can Access that Function rather than _questionBank List
   }
 
   bool getQuestionAnswer() {
-    return _questionBank[questionNumber].answer;
+    return _questionBank[_questionNumber].answer;
   }
 }
