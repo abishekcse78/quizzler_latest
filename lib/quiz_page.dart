@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizzler/quiz_brain.dart';
 
-QuizBrain quizBrain = QuizBrain();
-
 class QuizPage extends StatefulWidget {
   const QuizPage({Key? key}) : super(key: key);
 
@@ -13,9 +11,9 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-  void checkAnswer(userPickedAnswer) {
+  void checkAnswer(bool userPickedAnswer) {
     /// correctAnswer = True (or) False
-    bool correctAnswer = QuizBrain().getQuestionAnswer();
+    bool correctAnswer = quizBrain.getQuestionAnswer();
     setState(() {
       /// if the UserPickedAnswer is CorrectAnswer Return True (Tick Icon)
       correctAnswer == userPickedAnswer
@@ -31,7 +29,7 @@ class _QuizPageState extends State<QuizPage> {
               color: Colors.red,
             ));
 
-      QuizBrain().getNextQuestion();
+      quizBrain.getNextQuestion();
     });
   }
 
@@ -47,7 +45,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                QuizBrain().getQuestionText(),
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25.0,

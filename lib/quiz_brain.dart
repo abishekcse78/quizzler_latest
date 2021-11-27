@@ -37,3 +37,5 @@ class QuizBrain {
     return _questionBank[_questionNumber].answer;
   }
 }
+
+QuizBrain quizBrain = QuizBrain();
