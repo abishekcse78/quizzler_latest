@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quizzler/quiz_brain.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import 'constant/strings.dart';
+
 class QuizPage extends StatefulWidget {
   const QuizPage({Key? key}) : super(key: key);
 
@@ -20,13 +22,12 @@ class _QuizPageState extends State<QuizPage> {
         Alert(
           context: context,
           type: AlertType.error,
-          title: "You are Finished",
-          desc:
-              "You are Finished your All Quiz, Thank you for your Participation",
+          title: kAlertTitle,
+          desc: kAlertDescription,
           buttons: [
             DialogButton(
               child: const Text(
-                "Close",
+                kTextClose,
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               onPressed: () => Navigator.pop(context),
@@ -34,7 +35,7 @@ class _QuizPageState extends State<QuizPage> {
             )
           ],
         ).show();
-
+      } else {
         /// if the UserPickedAnswer is CorrectAnswer Return True (Tick Icon)
         correctAnswer == userPickedAnswer
             ? scoreKeeper.add(const Icon(
@@ -81,7 +82,7 @@ class _QuizPageState extends State<QuizPage> {
               padding: const EdgeInsets.all(15.0),
               child: TextButton(
                 child: const Text(
-                  'True',
+                  kTextTrue,
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 style: ButtonStyle(
@@ -96,7 +97,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
               child: const Text(
-                'False',
+                kTextFalse,
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               style: ButtonStyle(
