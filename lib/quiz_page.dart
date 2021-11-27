@@ -35,6 +35,7 @@ class _QuizPageState extends State<QuizPage> {
             )
           ],
         ).show();
+        quizBrain.reset();
       } else {
         /// if the UserPickedAnswer is CorrectAnswer Return True (Tick Icon)
         correctAnswer == userPickedAnswer
